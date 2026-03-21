@@ -1,0 +1,9 @@
+<h1>{{  titulo.upper()  }}</h1>
+upper: colocar os caracteres em caixa alta;
+round: arredondar números;
+trim: remover espaços do início e do fim do texto;
+default('texto exibido por padrão') - quando queremos mostrar algo, caso a variável esteja vazia ou nula.
+
+<form action= '/criar' method="post">
+por padrão o metodo é o get, para enviarmos as informações para o servidor
+ precisamos mudar o metodo para post e definir a rota em action
