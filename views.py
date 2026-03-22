@@ -2,6 +2,7 @@ from flask import  render_template, request, redirect, session, flash, url_for, 
 from jogoteca import app, db
 from models import Jogos, Usuarios
 from helpers import recupera_imagem
+import time
 
 @app.route('/')
 def index():
@@ -62,8 +63,8 @@ def atualizar():
     db.session.commit()
 
     arquivo = request.files['arquivo']
-    #upload_path = app.config['UPLOAD_PATH']
-    #arquivo.save(f'{upload_path}/capa{jogo.id}.jpg')
+    upload_path = app.config['UPLOAD_PATH']
+    arquivo.save(f'{upload_path}/capa{jogo.id}.jpg')
 
     return redirect(url_for('index'))
 
