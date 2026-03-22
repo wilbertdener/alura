@@ -34,6 +34,22 @@ def criar():
 
     return redirect(url_for('index'))#substitui a rota pela função que instacia
 
+
+@app.route('/editar/<int:id>')
+def editar(id):
+    if 'usuario_logado' not in session or session['usuario_logado']==None:
+        #return redirect('/login?proxima=novo')#informação da query string no url
+        return redirect(url_for('login', proxima=url_for('editar')))
+    jogo = Jogos.query.filter_by(id=id).first()
+    return render_template('editar.html', titulo='Editando Jogo', jogo=jogo)
+
+@app.route('/atualizar', methods=['POST',])
+def atualizar():
+    #tag name
+    pass
+
+
+
 @app.route('/login')
 def login():
     proxima = request.args.get('proxima')
