@@ -1,6 +1,6 @@
 from flask import  render_template, request, redirect, session, flash, url_for, send_from_directory
 from jogoteca import app, db
-from models import Jogos, Usuarios
+from models import Jogos
 from helpers import recupera_imagem, deleta_arquivo, FormularioJogo
 import time
 
@@ -96,30 +96,7 @@ def deletar(id):
 
 
 
-@app.route('/login')
-def login():
-    proxima = request.args.get('proxima')
-    return render_template('login.html', proxima=proxima)#passando as informações para o html
 
-@app.route('/autenticar', methods=['POST',])
-def autenticar():
-    usuario = Usuarios.query.filter_by(nickname=request.form['usuario']).first()
-    if usuario:
-        if request.form['senha'] == usuario.senha:
-            session['usuario_logado'] = usuario.nickname
-            flash( usuario.nickname + ' logado com sucesso!')
-            proxima_pagina = request.form['proxima']
-            return redirect(proxima_pagina)
-
-    else:
-        flash('Usuário não logado.')
-        return redirect(url_for('login'))
-
-@app.route('/logout')
-def logout():
-    session['usuario_logado'] = None
-    flash('Logout efetuado com sucesso!')
-    return redirect(url_for('index'))
 
 @app.route('/uploads/<nome_arquivo>')
 def imagem(nome_arquivo):
